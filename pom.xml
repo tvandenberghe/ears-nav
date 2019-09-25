@@ -1,0 +1,185 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>be.naturalsciences.odnature.bmdc</groupId>
+  <artifactId>ears2Nav</artifactId>
+  <version>0.6</version>
+   <packaging>war</packaging>
+   
+   
+  <name>ears2Nav</name>
+  <description>cc</description>
+
+
+
+	<properties>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- maven-compiler-plugin -->
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+
+  
+
+  
+
+  
+  
+    <dependencies>
+
+	<dependency>
+		<groupId>com.oracle.jdbc</groupId>
+		<artifactId>ojdbc8</artifactId>
+		<version>12.2.0.1</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.mariadb.jdbc</groupId>
+		<artifactId>mariadb243</artifactId>
+		<version>2.4.3</version>
+	</dependency>
+
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>8.0.11</version>
+	</dependency>
+    	<dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>mssql-jdbc</artifactId>
+    <version>7.4.1.jre11</version>
+</dependency>
+	<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.2.8</version>
+</dependency>
+    
+	 <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-servlet-initializer</artifactId>
+            <version>3.1.4.Final</version>
+        </dependency>
+        
+          <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>3.1.4.Final</version>
+        </dependency>
+  
+  
+  <dependency>
+   <groupId>javax.enterprise</groupId>
+   <artifactId>cdi-api</artifactId>
+   <version>2.0</version>
+   <scope>provided</scope>
+</dependency>
+  
+
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-shaded</artifactId>
+            <version>3.1.1.Final</version>
+        </dependency> 
+        
+    
+
+        
+     <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-cdi</artifactId>
+            <version>3.1.4.Final</version>
+        </dependency>
+
+     <dependency>
+       <groupId>org.jboss.resteasy</groupId>
+       <artifactId>resteasy-jackson2-provider</artifactId>
+       <version>3.1.4.Final</version>
+    </dependency>
+
+
+<dependency>
+    <groupId>org.jdom</groupId>
+    <artifactId>jdom</artifactId>
+    <version>1.1</version>
+</dependency>
+
+	<dependency>
+    		<groupId>com.google.code.gson</groupId>
+    		<artifactId>gson</artifactId>
+    		<version>2.8.0</version>
+    	</dependency>
+
+
+
+
+    
+    </dependencies>
+<build>
+	<!-- Maven will append the version to the finalName (which is the name given 
+		to the generated war, and hence the context root) -->
+	<finalName>${project.artifactId}</finalName>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>2.3</version>
+			<configuration>
+				<failOnMissingWebXml>false</failOnMissingWebXml>
+				 <packagingExcludes>src/main/resources/config.properties</packagingExcludes>
+				 <!-- put this configuarion file in catalina.base/ears/ears.properties -->
+				   <webResources>
+                        <resource>
+                            <!--project build path-->
+                            <directory>${project.basedir}/target/</directory>
+                          
+                          
+                        </resource>
+                    </webResources>
+				 
+			</configuration>
+		</plugin>
+	</plugins>
+	<resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+            <excludes>
+                <exclude>**/config.properties</exclude>
+            </excludes>
+        </resource>
+    </resources>
+</build>
+  
+  
+  
+  
+  
+</project>
+
+
+<!-- 
+Although hardly a comprehensive list, these are the most common default lifecycle phases executed.
+
+    validate: validate the project is correct and all necessary information is available
+    compile: compile the source code of the project
+    test: test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+    package: take the compiled code and package it in its distributable format, such as a JAR.
+    integration-test: process and deploy the package if necessary into an environment where integration tests can be run
+    verify: run any checks to verify the package is valid and meets quality criteria
+    install: install the package into the local repository, for use as a dependency in other projects locally
+    deploy: done in an integration or release environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+There are two other Maven lifecycles of note beyond the default list above. They are
+
+    clean: cleans up artifacts created by prior builds
+
+    site: generates site documentation for this project
+    
+    
+   this pom contains  dependencies  for RESTEasy, Weld, and Jackson provider
+    
+    -->
+
